@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal"
+    tools:context=".AboutActivity">
+
+    <TextView
+        android:id="@+id/tv_nome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SOBRE:"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginTop="24dp"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/tv_nome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Franciele de Souza"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginTop="24dp"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/tv_ra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RA: 09048034"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/tv_curso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Curso: Análise e Desenvolvimento de Sistemas"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/tv_curso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UNIPAR EAD"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"/>
+
+</LinearLayout>
