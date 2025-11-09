@@ -6,15 +6,13 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
+    @GET("forecast")
+    Call<ForecastResponse> getForecast(
 
-    @GET("weather")
-    Call<WeatherResponse> getWeather(
-
-            @Query("q") String cityName,
-            @Query("appid") String apiKey,
-            @Query("units") String units,
-            @Query("lang") String lang
+                                        @Query("q") String cityName,
+                                        @Query("appid") String apiKey,
+                                        @Query("units") String units,
+                                        @Query("lang") String lang
     );
-
 
 }

@@ -1,6 +1,9 @@
 package com.example.previsaodotempo;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+// IMPORTANTE: Importar a Toolbar correta
+import androidx.appcompat.widget.Toolbar;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -9,16 +12,20 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-            if (getSupportActionBar() != null) {
+        Toolbar toolbar = findViewById(R.id.toolbar_about);
+
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Sobre");
+
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
-
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        onBackPressed(); // Volta para a tela anterior
         return true;
     }
 }

@@ -6,20 +6,33 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
+import java.util.ArrayList;
 
+// O Adaptador agora lida com uma LISTA de itens
 public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder> {
 
-    private WeatherResponse weatherResponse;
+    // A lista de itens de previsão
+    private List<ForecastItem> forecastList = new ArrayList<>();
 
-    public void setWeatherResponse(WeatherResponse response) {
-        this.weatherResponse = response;
+    // Método para atualizar os dados da lista
+    public void setForecastList(List<ForecastItem> list) {
+        // Filtra a lista para pegar só 5 dias (a cada 8 posições)
+        List<ForecastItem> dailyList = new ArrayList<>();
+        if (list != null) {
+            for (int i = 0; i < list.size() && i < 40; i += 8) {
+                dailyList.add(list.get(i));
+            }
+        }
+
+        this.forecastList = dailyList;
         notifyDataSetChanged(); // Avisa a lista para recarregar
     }
 
     @NonNull
     @Override
     public ForecastViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Carrega o layout do CardView que criamos
+        // Carrega o layout do CardView horizontal que criamos
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.forecast_list_item, parent, false);
         return new ForecastViewHolder(view);
@@ -27,31 +40,35 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
 
     @Override
     public void onBindViewHolder(@NonNull ForecastViewHolder holder, int position) {
-        if (weatherResponse == null) return; // Se não tem dados, não faz nada
+        // Pega o item da previsão para esta posição
+        ForecastItem item = forecastList.get(position);
 
-        // Pega os dados da API e coloca nos TextViews
-        Weather weather = weatherResponse.weather.get(0);
-        Main main = weatherResponse.main;
+        // Pega os dados de dentro do item
+        Weather weather = item.weather.get(0);
+        Main main = item.main;
 
-        holder.tvDescription.setText("Descrição: " + weather.description);
-        holder.tvTemp.setText("Temperatura: " + main.temp + " °C");
-        holder.tvTempMinMax.setText("Mín: " + main.temp_min + " °C / Máx: " + main.temp_max + " °C");
+        // Coloca os dados nos TextViews
+        // TODO: Converter data "dt_txt" para dia da semana
+        holder.tvDay.setText(item.dt_txt.substring(5, 10)); // Mostra a data (ex: "11-09")
+        holder.tvTemp.setText(String.format("%.0f°", main.temp)); // Arredonda a temp
+        holder.tvDescription.setText(weather.description);
     }
 
     @Override
     public int getItemCount() {
-        // Se temos uma resposta, mostramos 1 item. Senão, 0.
-        return (weatherResponse == null) ? 0 : 1;
+        // Retorna o tamanho da nossa lista
+        return forecastList.size();
     }
 
+    // O "ViewHolder" encontra os TextViews dentro do CardView
     public static class ForecastViewHolder extends RecyclerView.ViewHolder {
-        TextView tvDescription, tvTemp, tvTempMinMax;
+        TextView tvDay, tvTemp, tvDescription;
 
         public ForecastViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvDescription = itemView.findViewById(R.id.tv_description);
+            tvDay = itemView.findViewById(R.id.tv_day);
             tvTemp = itemView.findViewById(R.id.tv_temp);
-            tvTempMinMax = itemView.findViewById(R.id.tv_temp_min_max);
+            tvDescription = itemView.findViewById(R.id.tv_description);
         }
     }
 }

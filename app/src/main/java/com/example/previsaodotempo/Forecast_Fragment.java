@@ -9,6 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,33 +33,45 @@ public class Forecast_Fragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_forecast, container, false);
 
+        // 1. Encontra o RecyclerView
         recyclerView = view.findViewById(R.id.recycler_view_forecast);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        // 2. Define a lista como HORIZONTAL
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // 3. Inicializa o Adaptador (vazio)
         forecastAdapter = new ForecastAdapter();
         recyclerView.setAdapter(forecastAdapter);
 
+        // 4. Prepara o serviço da API (Retrofit)
         apiService = RetrofitClient.getClient().create(ApiService.class);
 
         return view;
     }
 
+    // 5. Método que a MainActivity chama
     public void searchCity(String cityName) {
 
         Toast.makeText(getContext(), "Buscando " + cityName + "...", Toast.LENGTH_SHORT).show();
 
-        Call<WeatherResponse> call = apiService.getWeather(
-                cityName,                           // "q" (cidade)
-                RetrofitClient.API_KEY,             // "appid" (sua chave)
-                "metric",                           // "units" (celsius)
-                "pt_br"                             // "lang" (português)
+        // 6. Chama a nova API "getForecast"
+        Call<ForecastResponse> call = apiService.getForecast(
+                cityName,
+                RetrofitClient.API_KEY,
+                "metric",
+                "pt_br"
         );
 
-        call.enqueue(new Callback<WeatherResponse>() {
+        // 7. Processa a resposta
+        call.enqueue(new Callback<ForecastResponse>() {
             @Override
-            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
-                if (response.isSuccessful()) {
-                    forecastAdapter.setWeatherResponse(response.body());
+            public void onResponse(Call<ForecastResponse> call, Response<ForecastResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+
+                    // Passa a lista inteira para o Adaptador (que vai filtrar)
+                    forecastAdapter.setForecastList(response.body().list);
+
                 } else {
                     Toast.makeText(getContext(), "Cidade não encontrada.", Toast.LENGTH_LONG).show();
                     Log.e("API_ERROR", "Erro: " + response.code());
@@ -63,10 +79,11 @@ public class Forecast_Fragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<WeatherResponse> call, Throwable t) {
+            public void onFailure(Call<ForecastResponse> call, Throwable t) {
                 Toast.makeText(getContext(), "Falha na conexão com a API.", Toast.LENGTH_LONG).show();
                 Log.e("API_FAILURE", "Erro: " + t.getMessage());
             }
         });
     }
+
 }

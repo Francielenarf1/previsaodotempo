@@ -1,59 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center_horizontal"
     tools:context=".AboutActivity">
 
-    <TextView
-        android:id="@+id/tv_nome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SOBRE:"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginTop="24dp"
-        android:textAlignment="center"/>
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_about"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:title="Sobre"
+        app:titleTextColor="@android:color/white"
+        app:popupTheme="@style/Theme.AppCompat.Light" />
 
-    <TextView
-        android:id="@+id/tv_nome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Franciele de Souza"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginTop="24dp"
-        android:textAlignment="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/tv_ra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RA: 09048034"
-        android:textSize="18sp"
-        android:layout_marginTop="8dp"
-        android:textAlignment="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Franciele de Souza"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"/>
 
-    <TextView
-        android:id="@+id/tv_curso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Curso: Análise e Desenvolvimento de Sistemas"
-        android:textSize="18sp"
-        android:layout_marginTop="8dp"
-        android:textAlignment="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RA: 09048034"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:layout_marginBottom="4dp"/>
 
-    <TextView
-        android:id="@+id/tv_curso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="UNIPAR EAD"
-        android:textSize="18sp"
-        android:layout_marginTop="8dp"
-        android:textAlignment="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Curso: Análise e Desenvolvimento de Sistemas"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Polo: Toledo - PR"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Instituição: UNIPAR EAD"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aplicativo desenvolvido para a disciplina de Programação de Dispositivos Móveis"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Professor: Carlos Eduardo Simões Pelegrin"
+            android:textSize="16sp"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
 
 </LinearLayout>
